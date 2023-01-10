@@ -32,13 +32,15 @@ public class ParsingJsonResponse {
 		given()
 			.contentType(ContentType.JSON)
 
-		.when()
+		.when().log().all()
+
 			.get("http://localhost:3000/store");
 
 		Assert.assertEquals(res.getStatusCode(),200);    //validation 1
 		Assert.assertEquals(res.header("Content-Type"),"application/json; charset=utf-8");
 
 		String bookName=res.jsonPath().get("book[3].title").toString();
+        System.out.println(bookName);
 		Assert.assertEquals(bookName,"The Lord of the Rings");
 
     }
